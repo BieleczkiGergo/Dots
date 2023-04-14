@@ -1,0 +1,15 @@
+*{
+    background-color: rgb(8, 17, 36);
+    color: white;
+    
+}
+
+menu hr{
+    background-color: white;
+
+}
+
+canvas#editorCanvas{
+    background-color: white;
+    
+}
