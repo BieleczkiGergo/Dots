@@ -9,5 +9,9 @@ class Menu{
         new MenuItem(modes.newNode, "./pics/noIcon.svg", "new node", "new node", this.menu);
         new MenuItem(modes.newConnection, "./pics/noIcon.svg", "new connection", "new connection", this.menu);
 
+        this.menu.onclick = function(){
+            //Put something here
+        }
+
     }
 }
