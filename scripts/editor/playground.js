@@ -14,6 +14,10 @@ class Playground{
             this.mouseX = event.clientX - global.editor.X;
             this.mouseY = event.clientY - global.editor.Y;
 
+            if(global.editor.mode == modes.grab){
+                this.selection.updatePos(this.mouseX, this.mouseY);
+
+            }
             this.draw();
 
         }

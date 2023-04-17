@@ -1,14 +1,22 @@
 class SelectionBox{
 
 
-    /**@type {...GraphNode} */
+    /**@type {Array} */
     nodes;
     /**@type {Number} - X of where selection started*/
-    X;
+    startX;
     /**@type {Number} - Y of where selection started*/
-    Y;
+    startY;
+    /**@type {Number} - X of where selection currently is*/
+    endX;
+    /**@type {Number} - Y of where selection currently is*/
+    endY;
     /**@type {GraphNode}*/
     hovered;
+    /**@type {GraphNode} */
+    selected;
+    /**@type {boolean} */
+    grabbing;
 
     constructor(){
         this.hovered = null;
@@ -17,32 +25,48 @@ class SelectionBox{
 
     /**
      * Draws the selection box if needed to the coordinates specified.
-     * @param {Number} X 
-     * @param {Number} Y 
      */
     draw(X, Y){
-        if(this.X == null || this.Y == null){
+        if(this.startX == null || this.startY == null){
             return;
             
         }
-        if(Math.sqrt(Math.pow(this.X-X, 2) + Math.pow(this.Y-Y, 2)) < global.minSelectBox){
+        //If selection box would be too small
+        if(this.hypSize < global.minSelectBox){
             return;
 
         }
         global.editor.ctx.beginPath();
         global.editor.ctx.fillStyle = global.selectionColor;
-        global.editor.ctx.fillRect(this.X, this.Y, X-this.X, Y-this.Y);
+        global.editor.ctx.fillRect(this.startX, this.startY, X-this.startX, Y-this.startY);
 
     }
 
-    hypSize(){
+    get hypSize(){
+        return Math.sqrt(Math.pow(this.startX-this.endX, 2) + Math.pow(this.startY-this.endY, 2));
 
     }
 
     startSelection(X, Y){
-        this.X = X;
-        this.Y = Y;
+        this.nodes.push(global.graph.getNode());
+        
+        console.log(this.nodes.length);
+        if(this.nodes.length != 0){
+            this.grabbing = true;
+        }
+        this.startX = X;
+        this.startY = Y;
+        this.nodes[0].selected = true;
 
+    }
+
+    updatePos(X, Y){
+        this.endX = X;
+        this.endY = Y;
+        if(this.nodes.length != 0){
+            this.nodes[0].moveTo(X, Y);
+
+        }
     }
 
     /**
@@ -52,8 +76,7 @@ class SelectionBox{
      * @param {Number} connection 
      */
     select(X, Y, connection=false){
-
-        this.X = null;
-        this.Y = null;
+        this.startX = null;
+        this.startY = null;
     }
 }

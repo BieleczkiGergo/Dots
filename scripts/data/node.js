@@ -2,6 +2,8 @@ class GraphNode{
     
     X;
     Y;
+    selected;
+    hovered;
     color;
     text;
     size;
@@ -11,9 +13,9 @@ class GraphNode{
      * 
      * @param {Number} X 
      * @param {Number} Y 
+     * @param {Number} size 
      * @param {String} text 
      * @param {String} color 
-     * @param {String} size 
      */
     constructor(X, Y, text=global.nodeConf.text, color=global.nodeConf.color, size=global.nodeConf.size){
         this.X = X;
@@ -35,6 +37,10 @@ class GraphNode{
         global.editor.ctx.fillStyle = this.color;
         global.editor.ctx.arc(this.X, this.Y, this.size, Math.PI*2, 0);
         global.editor.ctx.fill();
+        if(this.selected){
+            global.editor.ctx.strokeStyle == "cyan";
+            global.editor.ctx.stroke();
+        }
 
     }
 }

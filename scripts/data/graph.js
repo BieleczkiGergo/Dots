@@ -28,7 +28,19 @@ class Graph{
      * @returns {GraphNode}
      */
     getNode(X, Y){
+        let distance = Math.sqrt(Math.pow(this.nodes[0].X-X, 2) + Math.pow(this.nodes[0].Y-Y, 2));
+        /**@type {GraphNode} */
+        let closest = this.nodes[0];
+        for(let node in this.nodes){
+            if(Math.sqrt(Math.pow(node.X-X, 2) + Math.pow(node.Y-Y, 2)) < distance){
+                closest = node;
+            }
+        }
 
+        if(distance > closest.size){
+            return null;
+        }
+        return closest;
     }
 
     /**
