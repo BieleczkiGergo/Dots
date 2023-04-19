@@ -15,7 +15,7 @@ class Playground{
             this.mouseY = event.clientY - global.editor.Y;
 
             if(global.editor.mode == modes.grab){
-                this.selection.updatePos(this.mouseX, this.mouseY);
+                this.selection.update(this.mouseX, this.mouseY);
 
             }
             this.draw();
@@ -34,14 +34,14 @@ class Playground{
 
         global.editor.body.onmousedown = (event) => {
             if(global.editor.mode == modes.grab){
-                this.selection.startSelection(this.mouseX, this.mouseY);
+                this.selection.start(this.mouseX, this.mouseY);
 
             }
         }
 
         global.editor.body.onmouseup = (event) => {
             if(global.editor.mode == modes.grab){
-                this.selection.select(this.mouseX, this.mouseY);
+                this.selection.end(this.mouseX, this.mouseY);
 
             }
         }

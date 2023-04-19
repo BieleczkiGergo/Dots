@@ -47,36 +47,15 @@ class SelectionBox{
 
     }
 
-    startSelection(X, Y){
-        this.nodes.push(global.graph.getNode());
-        
-        console.log(this.nodes.length);
-        if(this.nodes.length != 0){
-            this.grabbing = true;
-        }
-        this.startX = X;
-        this.startY = Y;
-        this.nodes[0].selected = true;
+    start(X, Y){
 
     }
 
-    updatePos(X, Y){
-        this.endX = X;
-        this.endY = Y;
-        if(this.nodes.length != 0){
-            this.nodes[0].moveTo(X, Y);
-
-        }
+    update(X, Y){
     }
 
-    /**
-     * 
-     * @param {Number} X 
-     * @param {Number} Y 
-     * @param {Number} connection 
-     */
-    select(X, Y, connection=false){
-        this.startX = null;
-        this.startY = null;
+    end(){
+
     }
+
 }
