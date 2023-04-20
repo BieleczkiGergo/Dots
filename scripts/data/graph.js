@@ -49,7 +49,7 @@ class Graph{
      * @param {Number} startY 
      * @param {Number} endX 
      * @param {Number} endY 
-     * @returns {...GraphNode}
+     * @returns {Array}
      */
     getNodes(startX, startY, endX, endY){
 

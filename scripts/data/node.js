@@ -2,6 +2,8 @@ class GraphNode{
     
     X;
     Y;
+    moveX;
+    moveY;
     selected;
     hovered;
     color;
@@ -29,6 +31,12 @@ class GraphNode{
     moveTo(X, Y){
         this.X = X;
         this.Y = Y;
+
+    }
+
+    moveBy(X, Y){
+        this.X += X;
+        this.Y += Y;
 
     }
 

@@ -13,29 +13,29 @@ class SelectionBox{
     endY;
     /**@type {GraphNode}*/
     hovered;
-    /**@type {GraphNode} */
+    /**@type {Array} */
     selected;
     /**@type {boolean} */
     grabbing;
 
     constructor(){
         this.hovered = null;
-        this.nodes = [];
+        this.selected = [];
     }
 
     /**
      * Draws the selection box if needed to the coordinates specified.
      */
     draw(X, Y){
-        if(this.startX == null || this.startY == null){
-            return;
-            
-        }
-        //If selection box would be too small
-        if(this.hypSize < global.minSelectBox){
-            return;
+        //if we aren't even selecting anything: it's enough to check one coordinate
+        if(this.startX == null) return;
 
-        }
+        //If selection box would be too small
+        if(this.hypSize < global.minSelectBox) return;
+
+        //If we are grabbing an item
+        if(grabbing) return;
+
         global.editor.ctx.beginPath();
         global.editor.ctx.fillStyle = global.selectionColor;
         global.editor.ctx.fillRect(this.startX, this.startY, X-this.startX, Y-this.startY);
@@ -48,13 +48,42 @@ class SelectionBox{
     }
 
     start(X, Y){
+        this.startX = X;
+        this.startY = Y;
+
+        let selectedNode = global.graph.getNode(X, Y);
+        if(selectedNode == null){
+            return;
+
+        }
+        this.grabbing = true;
+        selectedNode.selected = true;
+        this.selected.push(selectedNode);
 
     }
 
     update(X, Y){
+        this.endX = X;
+        this.endY = Y;
+
+        for(let node of this.selected){
+            node.moveBy(this.endX-this.startX, this.endY-this.startY);
+
+        }
+
     }
 
-    end(){
+    end(X, Y){
+        this.endX = X;
+        this.endY = Y;
+
+        if(!this.grabbing){
+            this.selected.length = 0;
+            this.selected.push(global.graph.getNodes(this.startX, this.startY, this.endX, this.endY));
+
+        }
+
+        this.grabbing = false;
 
     }
 
