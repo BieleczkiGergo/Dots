@@ -24,7 +24,6 @@ class Playground{
 
         global.editor.body.onclick = (event) => {
             if(global.editor.mode == modes.newNode){
-                console.log(global.graph);
                 global.graph.addNode(new GraphNode(this.mouseX, this.mouseY));
                 this.draw();
 

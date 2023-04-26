@@ -6,8 +6,6 @@ class Graph{
     connections;
 
     constructor(){
-        console.log("graph is being constructed");
-        console.log(this.addNode);
         this.nodes = [];
         this.connections = [];
 

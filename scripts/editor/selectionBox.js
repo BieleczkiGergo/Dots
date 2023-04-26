@@ -34,7 +34,7 @@ class SelectionBox{
         if(this.hypSize < global.minSelectBox) return;
 
         //If we are grabbing an item
-        if(grabbing) return;
+        if(this.grabbing) return;
 
         global.editor.ctx.beginPath();
         global.editor.ctx.fillStyle = global.selectionColor;
@@ -65,8 +65,10 @@ class SelectionBox{
     update(X, Y){
         this.endX = X;
         this.endY = Y;
-
+        if(this.selected.length == 0) return;
+        console.log(this.selected.length);
         for(let node of this.selected){
+            console.log(typeof node);
             node.moveBy(this.endX-this.startX, this.endY-this.startY);
 
         }
@@ -79,7 +81,7 @@ class SelectionBox{
 
         if(!this.grabbing){
             this.selected.length = 0;
-            this.selected.push(global.graph.getNodes(this.startX, this.startY, this.endX, this.endY));
+            //this.selected.push(global.graph.getNodes(this.startX, this.startY, this.endX, this.endY));
 
         }
 
