@@ -26,6 +26,11 @@ class Graph{
      * @returns {GraphNode}
      */
     getNode(X, Y){
+        const getDistance = (node)=>{
+            return Math.sqrt(Math.pow(node.X-X, 2) + Math.pow(node.Y-Y, 2));
+            
+        }
+
         let distance = Math.sqrt(Math.pow(this.nodes[0].X-X, 2) + Math.pow(this.nodes[0].Y-Y, 2));
         /**@type {GraphNode} */
         let closest = this.nodes[0];
@@ -34,7 +39,7 @@ class Graph{
                 closest = node;
             }
         }
-
+        console.log(closest);
         if(distance > closest.size){
             return null;
         }
