@@ -9,6 +9,7 @@ class GraphNode{
     color;
     text;
     size;
+    connections;
     meta;
 
     /**
@@ -25,6 +26,7 @@ class GraphNode{
         this.text = text;
         this.color = color;
         this.size = size;
+        this.connections = [];
 
     }
 
@@ -40,13 +42,30 @@ class GraphNode{
 
     }
 
+    /**
+     * Connects to remoteNode, pointing to remoteNode
+     * @param {GraphNode} remoteNode 
+     */
+    connect(remoteNode){
+        this.connections.push(new GraphConnection(this, remoteNode));
+
+    }
+
+    drawConnections(){
+        this.connections.forEach(connection => {
+            connection.draw();
+            
+        });
+    }
+
     draw(){
         global.editor.ctx.beginPath();
         global.editor.ctx.fillStyle = this.color;
         global.editor.ctx.arc(this.X, this.Y, this.size, Math.PI*2, 0);
         global.editor.ctx.fill();
         if(this.selected){
-            global.editor.ctx.strokeStyle == "cyan";
+            global.editor.ctx.strokeStyle = "blue";
+            global.editor.ctx.lineWidth = 5;
             global.editor.ctx.stroke();
         }
 

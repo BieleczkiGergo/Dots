@@ -12,6 +12,15 @@ class Graph{
     }
 
     /**
+     * 
+     * @param {GraphNode} node1 
+     * @param {GraphNode} node2 
+     */
+    connectMutual(node1, node2){
+
+    }
+
+    /**
      * @param {GraphNode} node 
      */
     addNode(node){
@@ -31,15 +40,21 @@ class Graph{
             
         }
 
-        let distance = Math.sqrt(Math.pow(this.nodes[0].X-X, 2) + Math.pow(this.nodes[0].Y-Y, 2));
+        /**@type {Number} */
+        let distance = getDistance(this.nodes[0]);
         /**@type {GraphNode} */
         let closest = this.nodes[0];
-        for(let node in this.nodes){
-            if(Math.sqrt(Math.pow(node.X-X, 2) + Math.pow(node.Y-Y, 2)) < distance){
+        /**@type {Number} declared outside the loop for better performance*/
+        let tempDist = distance;
+        for(let node of this.nodes){
+            tempDist = getDistance(node);
+            if(tempDist < distance){
                 closest = node;
+                distance = tempDist;
+
             }
         }
-        console.log(closest);
+
         if(distance > closest.size){
             return null;
         }
@@ -55,14 +70,26 @@ class Graph{
      * @returns {Array}
      */
     getNodes(startX, startY, endX, endY){
+        let ret = [];
+        this.nodes.forEach(node => {
+            if(node.X > startX && node.Y > startY && node.X < endX && node.Y < endY){
+                ret.push(node);
 
+            }
+        });
+
+        return ret;
     }
 
     draw(){
-        for(let node of this.nodes){
+        this.nodes.forEach(node => {
+            node.drawConnections();
+
+        });
+        this.nodes.forEach(node => {
             node.draw();
 
-        }
+        });
     }
 
 }

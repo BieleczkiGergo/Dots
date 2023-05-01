@@ -27,20 +27,34 @@ class Playground{
                 global.graph.addNode(new GraphNode(this.mouseX, this.mouseY));
                 this.draw();
 
+            }else if(global.editor.mode == modes.newConnection){
+                if(this.selection.selected.size == 0){
+                    this.selection.select(this.mouseX, this.mouseY);
+                }else{
+                    let targetNode = global.graph.getNode(this.mouseX, this.mouseY);
+                    if(targetNode != null){
+                        this.selection.selected.forEach((node) => {
+                            node.connect(targetNode);
+
+                        });
+
+                    }
+                }
             }
         }
 
 
         global.editor.body.onmousedown = (event) => {
             if(global.editor.mode == modes.grab){
-                this.selection.start(this.mouseX, this.mouseY);
+                //If you know why event.shiftKey works in this case, please tell me
+                this.selection.start(this.mouseX, this.mouseY, event.shiftKey);
 
             }
         }
 
         global.editor.body.onmouseup = (event) => {
             if(global.editor.mode == modes.grab){
-                this.selection.end(this.mouseX, this.mouseY);
+                this.selection.end(this.mouseX, this.mouseY, event.shiftKey);
 
             }
         }

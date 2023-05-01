@@ -7,51 +7,26 @@
    viewBox="0 0 161.04514 161.04514"
    version="1.1"
    id="svg5"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    sodipodi:docname="noIcon.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview7"
-     pagecolor="#505050"
-     bordercolor="#ffffff"
-     borderopacity="1"
-     inkscape:showpageshadow="0"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="1"
-     inkscape:deskcolor="#505050"
-     inkscape:document-units="mm"
-     showgrid="false"
-     inkscape:zoom="0.7198092"
-     inkscape:cx="318.83449"
-     inkscape:cy="502.91105"
-     inkscape:window-width="1920"
-     inkscape:window-height="1011"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
-  <defs
-     id="defs2" />
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(-20.89921,-15.312366)">
-    <rect
-       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#c90000;stroke-width:20;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect2240"
-       width="141.04514"
-       height="141.04514"
-       x="30.89921"
-       y="25.312366"
-       rx="8.4804125"
-       ry="3.5676954" />
-    <path
-       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#c90000;stroke-width:20;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 169.71592,28.654996 33.297058,165.07961"
-       id="path2406" />
-  </g>
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd">
+   <g
+      inkscape:label="Layer 1"
+      inkscape:groupmode="layer"
+      id="layer1"
+      transform="translate(-20.89921,-15.312366)">
+      <rect
+         style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#c90000;stroke-width:20;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect2240"
+         width="141.04514"
+         height="141.04514"
+         x="30.89921"
+         y="25.312366"
+         rx="8.4804125"
+         ry="3.5676954" />
+      <path
+         style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#c90000;stroke-width:20;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="M 169.71592,28.654996 33.297058,165.07961"
+         id="path2406" />
+   </g>
 </svg>

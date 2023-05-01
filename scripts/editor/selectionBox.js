@@ -1,8 +1,5 @@
 class SelectionBox{
 
-
-    /**@type {Array} */
-    nodes;
     /**@type {Number} - X of where selection started*/
     startX;
     /**@type {Number} - Y of where selection started*/
@@ -13,7 +10,7 @@ class SelectionBox{
     endY;
     /**@type {GraphNode}*/
     hovered;
-    /**@type {Array} */
+    /**@type {Set} */
     selected;
     /**@type {boolean} */
     grabbing;
@@ -22,7 +19,7 @@ class SelectionBox{
 
     constructor(){
         this.hovered = null;
-        this.selected = [];
+        this.selected = new Set();
         this.mouseDown = true;
     }
 
@@ -53,23 +50,39 @@ class SelectionBox{
 
     }
 
-    start(X, Y){
+    /**
+     * Start the selectionBox at coordinates.
+     * Used on mousedown.
+     * @param {Number} X 
+     * @param {Number} Y 
+     * @param {Boolean} append - whether to append to current selection or replace
+     * @returns {null}
+     */
+    start(X, Y, append=false){
         this.mouseDown = true;
         this.startX = X;
         this.startY = Y;
 
         let selectedNode = global.graph.getNode(X, Y);
+        if(!append && !this.selected.has(selectedNode)) this.clear();
+
         if(selectedNode == null){
             return;
-
+            
         }
         this.grabbing = true;
         selectedNode.selected = true;
-        this.selected.push(selectedNode);
-        console.log(this.selected);
+        this.selected.add(selectedNode);
 
     }
 
+    /**
+     * Updates the selectionBox at cordinates.
+     * Used on mousemove.
+     * @param {Number} X 
+     * @param {Number} Y 
+     * @returns {null}
+     */
     update(X, Y){
         let moveX = X-this.endX;
         let moveY = Y-this.endY;
@@ -78,31 +91,66 @@ class SelectionBox{
         this.endY = Y;
 
         if(this.selected.length == 0) return;
+        if(!this.grabbing) return;
 
         for(let node of this.selected){
-            console.log(typeof node);
             node.moveBy(moveX, moveY);
 
         }
 
     }
 
-    end(X, Y){
-        console.log("end was called");
+    /**
+     * Ends the selectionBox at specified coordinates, selecting the area if needed.
+     * Used on mousedown.
+     * @param {Number} X 
+     * @param {Number} Y 
+     * @param {Boolean} append - whether to append to current selection or replace
+     */
+    end(X, Y, append=false){
         this.mouseDown = false;
         this.endX = X;
         this.endY = Y;
 
-        if(!this.grabbing){
+        if(this.grabbing){
             this.grabbing = false;
 
-            this.selected.length = 0;
-            let newSelection = global.graph.getNodes(this.startX, this.startY, this.endX, this.endY);
-            if(newSelection == null) return;
-            if(newSelection.length != 0) this.selected.push(newSelection);
+        }else{
+            if(!append) this.clear();
+            global.graph.getNodes(this.startX, this.startY, X, Y).forEach(node => {
+                this.selected.add(node);
+                node.selected = true;
+
+            });
 
         }
 
+
+    }
+
+    /**
+     * Quickly selects a node (not an area) at given coordinates.
+     * Used on click event.
+     * @param {Number} X
+     * @param {Number} Y
+     * @returns {null}
+     */
+    select(X, Y){
+        let tempNode = global.graph.getNode(X, Y);
+        if(tempNode != null){
+            this.selected.add(tempNode);
+            tempNode.selected = true;
+
+        }
+
+    }
+
+    clear(){
+        this.selected.forEach((node) => {
+            node.selected = false;
+
+        });
+        this.selected.clear();
 
     }
 

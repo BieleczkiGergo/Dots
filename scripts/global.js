@@ -21,6 +21,8 @@ let global = {
     editor : {
         /** @type {MenuMode} */
         mode : modes.grab,
+        /**@type {boolean} */
+        displacing : false,
         /** @type {HTMLCanvasElement} */
         body : null,
         /** @type {CanvasRenderingContext2D} */
