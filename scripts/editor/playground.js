@@ -12,7 +12,8 @@ class Playground{
 
         window.onkeydown = (event) => {
             if(event.keyCode == 46){
-                global.graph.deleteNodes(this.selection.selected);
+                this.selection.deleteNodes();
+                this.draw();
                 
             }
         }
@@ -35,12 +36,12 @@ class Playground{
                 this.draw();
 
             }else if(global.editor.mode == modes.newConnection){
-                if(this.selection.selected.size == 0){
+                if(this.selection.selectedNodes.size == 0){
                     this.selection.select(this.mouseX, this.mouseY);
                 }else{
                     let targetNode = global.graph.getNode(this.mouseX, this.mouseY);
                     if(targetNode != null){
-                        this.selection.selected.forEach((node) => {
+                        this.selection.selectedNodes.forEach((node) => {
                             node.connect(targetNode);
 
                         });

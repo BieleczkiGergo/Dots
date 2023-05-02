@@ -11,7 +11,7 @@ class SelectionBox{
     /**@type {GraphNode}*/
     hovered;
     /**@type {Set} */
-    selected;
+    selectedNodes;
     /**@type {boolean} */
     grabbing;
     /**@type {boolean} */
@@ -19,7 +19,7 @@ class SelectionBox{
 
     constructor(){
         this.hovered = null;
-        this.selected = new Set();
+        this.selectedNodes = new Set();
         this.mouseDown = true;
     }
 
@@ -64,7 +64,7 @@ class SelectionBox{
         this.startY = Y;
 
         let selectedNode = global.graph.getNode(X, Y);
-        if(!append && !this.selected.has(selectedNode)) this.clear();
+        if(!append && !this.selectedNodes.has(selectedNode)) this.clear();
 
         if(selectedNode == null){
             return;
@@ -72,7 +72,7 @@ class SelectionBox{
         }
         this.grabbing = true;
         selectedNode.selected = true;
-        this.selected.add(selectedNode);
+        this.selectedNodes.add(selectedNode);
 
     }
 
@@ -90,10 +90,10 @@ class SelectionBox{
         this.endX = X;
         this.endY = Y;
 
-        if(this.selected.length == 0) return;
+        if(this.selectedNodes.length == 0) return;
         if(!this.grabbing) return;
 
-        for(let node of this.selected){
+        for(let node of this.selectedNodes){
             node.moveBy(moveX, moveY);
 
         }
@@ -118,7 +118,7 @@ class SelectionBox{
         }else{
             if(!append) this.clear();
             global.graph.getNodes(this.startX, this.startY, X, Y).forEach(node => {
-                this.selected.add(node);
+                this.selectedNodes.add(node);
                 node.selected = true;
 
             });
@@ -138,7 +138,7 @@ class SelectionBox{
     select(X, Y){
         let tempNode = global.graph.getNode(X, Y);
         if(tempNode != null){
-            this.selected.add(tempNode);
+            this.selectedNodes.add(tempNode);
             tempNode.selected = true;
 
         }
@@ -146,11 +146,17 @@ class SelectionBox{
     }
 
     clear(){
-        this.selected.forEach((node) => {
+        this.selectedNodes.forEach((node) => {
             node.selected = false;
 
         });
-        this.selected.clear();
+        this.selectedNodes.clear();
+
+    }
+
+    deleteNodes(){
+        global.graph.deleteNodes(this.selectedNodes);
+        this.selectedNodes.clear();
 
     }
 

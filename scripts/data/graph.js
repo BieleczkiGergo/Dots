@@ -1,6 +1,6 @@
 class Graph{
 
-    /**@type {Array} */
+    /**@type {Set} */
     nodes;
     /**@type {...GraphConnection} */
     connections;
@@ -24,7 +24,7 @@ class Graph{
      * @param {GraphNode} node 
      */
     addNode(node){
-        this.nodes.push(node);
+        this.nodes.add(node);
 
     }
 
@@ -40,20 +40,23 @@ class Graph{
             
         }
 
-        /**@type {Number} */
-        let distance = getDistance(this.nodes[0]);
         /**@type {GraphNode} */
-        let closest = this.nodes[0];
+        let closest = Array.from(this.nodes)[0];
+
+        /**@type {Number} */
+        let distance = getDistance(closest);
+
         /**@type {Number} declared outside the loop for better performance*/
         let tempDist = distance;
-        for(let node of this.nodes){
+
+        this.nodes.forEach(node => {
             tempDist = getDistance(node);
             if(tempDist < distance){
                 closest = node;
                 distance = tempDist;
 
             }
-        }
+        });
 
         if(distance > closest.size){
             return null;
@@ -86,14 +89,10 @@ class Graph{
      * @param {Set} targets 
      */
     deleteNodes(targets){
-        console.log(targets);
-        this.nodes.filter(node => {
-            if(targets.has(node)) console.log("common element found");
-            return !targets.has(node);
+        targets.forEach(node => {
+            this.nodes.delete(node);
 
         });
-        console.log(this.nodes);
-
     }
 
     draw(){
