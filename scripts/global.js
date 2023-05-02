@@ -5,6 +5,8 @@ let modes = {
     grab : 1,
     newNode : 2,
     newConnection : 3,
+    selectConnection : 4,
+    deleteNode : 5,
 
 }
 
@@ -21,8 +23,6 @@ let global = {
     editor : {
         /** @type {MenuMode} */
         mode : modes.grab,
-        /**@type {boolean} */
-        displacing : false,
         /** @type {HTMLCanvasElement} */
         body : null,
         /** @type {CanvasRenderingContext2D} */

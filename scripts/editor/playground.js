@@ -10,6 +10,13 @@ class Playground{
     constructor(){
         this.selection = new SelectionBox();
 
+        window.onkeydown = (event) => {
+            if(event.keyCode == 46){
+                global.graph.deleteNodes(this.selection.selected);
+                
+            }
+        }
+
         global.editor.body.onmousemove = (event) => {
             this.mouseX = event.clientX - global.editor.X;
             this.mouseY = event.clientY - global.editor.Y;
@@ -57,6 +64,7 @@ class Playground{
                 this.selection.end(this.mouseX, this.mouseY, event.shiftKey);
 
             }
+            this.draw();
         }
     }
 

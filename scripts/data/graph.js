@@ -1,12 +1,12 @@
 class Graph{
 
-    /**@type {...GraphNode} */
+    /**@type {Array} */
     nodes;
     /**@type {...GraphConnection} */
     connections;
 
     constructor(){
-        this.nodes = [];
+        this.nodes = new Set();
         this.connections = [];
 
     }
@@ -79,6 +79,21 @@ class Graph{
         });
 
         return ret;
+    }
+
+    /**
+     * 
+     * @param {Set} targets 
+     */
+    deleteNodes(targets){
+        console.log(targets);
+        this.nodes.filter(node => {
+            if(targets.has(node)) console.log("common element found");
+            return !targets.has(node);
+
+        });
+        console.log(this.nodes);
+
     }
 
     draw(){
