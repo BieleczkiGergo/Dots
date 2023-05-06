@@ -90,6 +90,7 @@ class Graph{
      */
     deleteNodes(targets){
         targets.forEach(node => {
+            node.delete();
             this.nodes.delete(node);
 
         });

@@ -46,14 +46,36 @@ class GraphNode{
      * Connects to remoteNode, pointing to remoteNode
      * @param {GraphNode} remoteNode 
      */
-    connect(remoteNode){
-        this.connections.push(new GraphConnection(this, remoteNode));
+    connect(remoteNode, backWards=false){
+        if(backWards) this.connections.push(new GraphConnection(remoteNode, this));
+        else {
+            this.connections.push(new GraphConnection(this, remoteNode));
 
+        }
+        
+    }
+
+    /**
+     * 
+     * @param {GraphNode} node
+     */
+    deleteConnectionsToNode(node){
+        this.connections.filter(connection =>
+            connection.target != node
+        );
+
+    }
+
+    delete(){
+        this.connections.forEach(connection => {
+            if(connection.target != this) connection.target.deleteConnection(connection);
+            //No need to delete it in current node, because the node will be deallocated
+        })
     }
 
     drawConnections(){
         this.connections.forEach(connection => {
-            connection.draw();
+            if(connection.base == this) connection.draw();
             
         });
     }
