@@ -6,8 +6,34 @@ class Playground{
     mouseX;
     /**@type {Number}*/
     mouseY;
+    /** @type {MenuMode} */
+    mode = modes.grab;
+    /** @type {HTMLCanvasElement} */
+    body = null;
+    /** @type {CanvasRenderingContext2D} */
+    ctx = null;
+    /** @type {Number} */
+    X = 0;
+    /** @type {Number} */
+    Y = 0;
+    /** @type {Number} */
+    width = 0;
+    /** @type {Number} */
+    height = 0;
 
+    
     constructor(){
+        this.body = document.getElementById("editorCanvas");
+        this.ctx = this.body.getContext("2d");
+    
+        let box = this.body.getBoundingClientRect();
+        this.X = box.x;
+        this.Y = box.y;
+        this.width = box.width;
+        this.height = box.height;
+        this.body.width = Math.round(box.width);
+        this.body.height = Math.round(box.height);
+
         this.selection = new SelectionBox();
 
         window.onkeydown = (event) => {
@@ -18,11 +44,11 @@ class Playground{
             }
         }
 
-        global.editor.body.onmousemove = (event) => {
-            this.mouseX = event.clientX - global.editor.X;
-            this.mouseY = event.clientY - global.editor.Y;
+        this.body.onmousemove = (event) => {
+            this.mouseX = event.clientX - this.X;
+            this.mouseY = event.clientY - this.Y;
 
-            if(global.editor.mode == modes.grab){
+            if(this.mode == modes.grab){
                 this.selection.update(this.mouseX, this.mouseY);
 
             }
@@ -30,12 +56,12 @@ class Playground{
 
         }
 
-        global.editor.body.onclick = (event) => {
-            if(global.editor.mode == modes.newNode){
+        this.body.onclick = (event) => {
+            if(this.mode == modes.newNode){
                 global.graph.addNode(new GraphNode(this.mouseX, this.mouseY));
                 this.draw();
 
-            }else if(global.editor.mode == modes.newConnection){
+            }else if(this.mode == modes.newConnection){
                 if(this.selection.selectedNodes.size == 0){
                     this.selection.select(this.mouseX, this.mouseY);
                 }else{
@@ -52,16 +78,16 @@ class Playground{
         }
 
 
-        global.editor.body.onmousedown = (event) => {
-            if(global.editor.mode == modes.grab){
+        this.body.onmousedown = (event) => {
+            if(this.mode == modes.grab){
                 //If you know why event.shiftKey works in this case, please tell me
                 this.selection.start(this.mouseX, this.mouseY, event.shiftKey);
 
             }
         }
 
-        global.editor.body.onmouseup = (event) => {
-            if(global.editor.mode == modes.grab){
+        this.body.onmouseup = (event) => {
+            if(this.mode == modes.grab){
                 this.selection.end(this.mouseX, this.mouseY, event.shiftKey);
 
             }
@@ -70,9 +96,9 @@ class Playground{
     }
 
     draw(){
-        global.editor.ctx.beginPath();
-        global.editor.ctx.fillStyle = "#ffffff";
-        global.editor.ctx.fillRect(0, 0, global.editor.width, global.editor.height);
+        this.ctx.beginPath();
+        this.ctx.fillStyle = "#ffffff";
+        this.ctx.fillRect(0, 0, this.width, this.height);
 
         global.graph.draw();
         this.selection.draw(this.mouseX, this.mouseY);

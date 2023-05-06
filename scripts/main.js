@@ -1,2 +1,1 @@
 new Menu();
-new Playground();
