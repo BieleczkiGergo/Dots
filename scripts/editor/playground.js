@@ -64,11 +64,12 @@ class Playground{
             }else if(this.mode == modes.newConnection){
                 if(this.selection.selectedNodes.size == 0){
                     this.selection.select(this.mouseX, this.mouseY);
+
                 }else{
                     let targetNode = global.graph.getNode(this.mouseX, this.mouseY);
                     if(targetNode != null){
-                        this.selection.selectedNodes.forEach((node) => {
-                            node.connect(targetNode);
+                        this.selection.selectedNodes.forEach((baseNode) => {
+                            global.graph.connect(baseNode, targetNode);
 
                         });
 

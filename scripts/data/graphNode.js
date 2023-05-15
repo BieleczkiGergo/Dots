@@ -1,3 +1,7 @@
+/**
+ * @typedef {String} CSSColorLiteral
+ */
+
 class GraphNode{
     
     X;
@@ -6,9 +10,13 @@ class GraphNode{
     moveY;
     selected;
     hovered;
+    /**@type {CSSColorLiteral} */
     color;
+    /**@type {String} */
     text;
+    /**@type {Number} */
     size;
+    /**@type {Set} */
     connections;
     meta;
 
@@ -26,7 +34,7 @@ class GraphNode{
         this.text = text;
         this.color = color;
         this.size = size;
-        this.connections = [];
+        this.connections = new Set();
 
     }
 
@@ -44,29 +52,42 @@ class GraphNode{
 
     /**
      * Connects to remoteNode, pointing to remoteNode
+     * deprecated
      * @param {GraphNode} remoteNode 
      */
     connect(remoteNode, backWards=false){
         if(backWards) this.connections.push(new GraphConnection(remoteNode, this));
         else {
-            this.connections.push(new GraphConnection(this, remoteNode));
+            this.connections.add(new GraphConnection(this, remoteNode));
 
         }
         
+    }
+
+    disconnect(connection){
+
+    }
+
+    disconnectNode(){
+        
+    }
+
+    addConnection(connection){
+        this.connections.add(connection);
     }
 
     /**
      * 
      * @param {GraphNode} node
      */
-    deleteConnectionsToNode(node){
-        this.connections.filter(connection =>
-            connection.target != node
-        );
+    deleteConnection(connection){
+        console.log(this.connections.delete(connection));
+        
 
     }
 
     delete(){
+        console.log("node is being deleted");
         this.connections.forEach(connection => {
             if(connection.target != this) connection.target.deleteConnection(connection);
             //No need to delete it in current node, because the node will be deallocated

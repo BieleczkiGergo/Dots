@@ -2,6 +2,7 @@ class Graph{
 
     /**@type {Set} */
     nodes;
+
     /**@type {...GraphConnection} */
     connections;
 
@@ -18,6 +19,19 @@ class Graph{
      */
     connectMutual(node1, node2){
 
+    }
+
+    /**
+     * Connects two nodes with a directed connection
+     * @param {GraphNode} base 
+     * @param {GraphNode} target 
+     */
+    connect(base, target){
+        /**@type {GraphConnection} */
+        let edge = new GraphConnection(base, target);
+        base.addConnection(edge);
+        target.addConnection(edge);
+        
     }
 
     /**
@@ -89,6 +103,7 @@ class Graph{
      * @param {Set} targets 
      */
     deleteNodes(targets){
+        console.log("deleteNodes called");
         targets.forEach(node => {
             node.delete();
             this.nodes.delete(node);
