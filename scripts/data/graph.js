@@ -103,7 +103,6 @@ class Graph{
      * @param {Set} targets 
      */
     deleteNodes(targets){
-        console.log("deleteNodes called");
         targets.forEach(node => {
             node.delete();
             this.nodes.delete(node);

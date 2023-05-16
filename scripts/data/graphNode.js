@@ -64,33 +64,34 @@ class GraphNode{
         
     }
 
-    disconnect(connection){
-
-    }
-
-    disconnectNode(){
+    disconnectNode(node){
         
-    }
-
-    addConnection(connection){
-        this.connections.add(connection);
     }
 
     /**
-     * 
+     * Adds a new connection
+     * @param {GraphConnection} connection 
+     */
+    addConnection(connection){
+        this.connections.add(connection);
+
+    }
+
+    /**
+     * Deletes the specified connection
      * @param {GraphNode} node
      */
     deleteConnection(connection){
-        console.log(this.connections.delete(connection));
-        
+        this.connections.delete(connection);
 
     }
 
     delete(){
-        console.log("node is being deleted");
         this.connections.forEach(connection => {
-            if(connection.target != this) connection.target.deleteConnection(connection);
+            if(connection.target == this) connection.base.deleteConnection(connection);
+            else connection.target.deleteConnection(connection);
             //No need to delete it in current node, because the node will be deallocated
+
         })
     }
 
