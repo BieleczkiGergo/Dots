@@ -117,7 +117,12 @@ class SelectionBox{
 
         }else{
             if(!append) this.clear();
-            global.graph.getNodes(this.startX, this.startY, X, Y).forEach(node => {
+
+            //Swap start and end coordinates if neccessary
+            if(this.startX > this.endX) [this.startX, this.endX] = [this.endX, this.startX];
+            if(this.startY > this.endY) [this.startY, this.endY] = [this.endY, this.startY];
+            
+            global.graph.getNodes(this.startX, this.startY, this.endX, this.endY).forEach(node => {
                 this.selectedNodes.add(node);
                 node.selected = true;
 
