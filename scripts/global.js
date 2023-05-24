@@ -20,8 +20,8 @@ let global = {
 
     },
     minSelectBox : 25,
-    /**@type {Playground}*/
-    editor : new Playground(),
+    /** @type {HTMLCanvasElement} */
+    canvas : document.getElementById("editorCanvas"),
     /**@type {Graph}*/
     graph : new Graph(),
     selectionColor : "rgba(44, 138, 226, 0.5)",

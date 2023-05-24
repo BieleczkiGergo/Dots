@@ -103,14 +103,14 @@ class GraphNode{
     }
 
     draw(){
-        global.editor.ctx.beginPath();
-        global.editor.ctx.fillStyle = this.color;
-        global.editor.ctx.arc(this.X, this.Y, this.size, Math.PI*2, 0);
-        global.editor.ctx.fill();
+        playground.ctx.beginPath();
+        playground.ctx.fillStyle = this.color;
+        playground.ctx.arc(this.X, this.Y, this.size, Math.PI*2, 0);
+        playground.ctx.fill();
         if(this.selected){
-            global.editor.ctx.strokeStyle = "blue";
-            global.editor.ctx.lineWidth = 5;
-            global.editor.ctx.stroke();
+            playground.ctx.strokeStyle = "blue";
+            playground.ctx.lineWidth = 5;
+            playground.ctx.stroke();
         }
 
     }

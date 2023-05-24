@@ -39,9 +39,9 @@ class SelectionBox{
         //If mouse is not down
         if(!this.mouseDown) return;
 
-        global.editor.ctx.beginPath();
-        global.editor.ctx.fillStyle = global.selectionColor;
-        global.editor.ctx.fillRect(this.startX, this.startY, X-this.startX, Y-this.startY);
+        playground.ctx.beginPath();
+        playground.ctx.fillStyle = global.selectionColor;
+        playground.ctx.fillRect(this.startX, this.startY, X-this.startX, Y-this.startY);
 
     }
 

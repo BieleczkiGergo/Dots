@@ -19,13 +19,13 @@ class GraphConnection{
     }
 
     draw(){
-        global.editor.ctx.beginPath();
-        global.editor.ctx.moveTo(this.base.X, this.base.Y);
-        global.editor.ctx.strokeStyle = this.color;
-        global.editor.ctx.lineWidth = this.width;
-        global.editor.ctx.lineTo(this.target.X, this.target.Y);
+        playground.ctx.beginPath();
+        playground.ctx.moveTo(this.base.X, this.base.Y);
+        playground.ctx.strokeStyle = this.color;
+        playground.ctx.lineWidth = this.width;
+        playground.ctx.lineTo(this.target.X, this.target.Y);
 
-        global.editor.ctx.stroke();
+        playground.ctx.stroke();
 
     }
 }

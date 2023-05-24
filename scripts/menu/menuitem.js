@@ -22,7 +22,7 @@ class MenuItem{
         this.image.title = title;
 
         this.image.onclick = function(){
-            global.editor.mode = modeValue;
+            playground.mode = modeValue;
 
         }
 
