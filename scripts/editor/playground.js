@@ -18,6 +18,8 @@ class Playground{
     width = 0;
     /** @type {Number} */
     height = 0;
+    /** @type {} */
+    properties = null;
 
     
     constructor(){
@@ -31,6 +33,7 @@ class Playground{
         global.canvas.height = Math.round(box.height);
 
         this.selection = new SelectionBox();
+        this.properties = new Properties();
     }
 
     draw(){
