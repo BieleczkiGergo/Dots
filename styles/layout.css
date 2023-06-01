@@ -24,24 +24,6 @@ header{
 
 }
 
-menu{
-    grid-area: tools;
-
-}
-
-.menuItem{
-    width: 100px;
-    display: block;
-
-}
-
-.divider{
-    width: 100%;
-    border: 2px solid white;
-    box-sizing: border-box;
-
-}
-
 div#properties{
     grid-area: properties;
     box-sizing: border-box;

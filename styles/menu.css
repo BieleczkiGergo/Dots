@@ -1,0 +1,17 @@
+menu{
+    grid-area: tools;
+
+}
+
+.menuItem{
+    width: 80px;
+    display: block;
+
+}
+
+.divider{
+    width: 100%;
+    border: 2px solid white;
+    box-sizing: border-box;
+
+}
